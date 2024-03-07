@@ -1,0 +1,14 @@
+{
+  "name": "SkillFlare",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Shahid-Shabbir-Ansari-SE/SkillFlare.git",
+  "license": "MIT",
+  "scripts": {
+    "install": "cd client && yarn install && cd ../server && yarn install",
+    "dev": "concurrently \"cd client && yarn run dev\" \"cd server && yarn dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
