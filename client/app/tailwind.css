@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Arial Rounded MT Bold';
+  src: url(/fonts/Arial_Rounded_MT_Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Arial Rounded MT';
+  src: url(/fonts/Arial_Rounded_MT.ttf);
+}
+
+@font-face {
+  font-family: 'Arial Rounded MT Light';
+  src: url(/fonts/Arial_Rounded_MT_Light.ttf);
+}
+
+@font-face {
+  font-family: 'Inter Bold';
+  src: url(/fonts/Inter/Inter-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Inter Regular';
+  src: url(/fonts/Inter/Inter-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Inter SemiBold';
+  src: url(/fonts/Inter/Inter-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: 'Inter Light';
+  src: url(/fonts/Inter/Inter-Light.ttf);
+}
+
+body {
+  font-family: 'Inter Regular', sans-serif;
+  overflow-x: hidden;
+  font-size: 16px;
+}
