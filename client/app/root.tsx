@@ -8,7 +8,6 @@ import {
   Scripts,
   ScrollRestoration
 } from '@remix-run/react'
-import Navbar from '../app/components/layout/navBar'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet }
@@ -25,11 +24,10 @@ export default function App() {
         <link rel='shortcut icon' href='/favicon.svg' type='image/x-icon' />
       </head>
       <body>
-        <Navbar />
+        <LiveReload />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   )

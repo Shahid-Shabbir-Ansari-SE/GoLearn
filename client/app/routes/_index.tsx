@@ -18,5 +18,5 @@ export const links: LinksFunction = () => {
 }
 
 export default function Index() {
-  return <div></div>
+  return <div>{process.env.NODE_ENV}</div>
 }
