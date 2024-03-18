@@ -1,5 +1,4 @@
 import type { MetaFunction, LinksFunction } from '@remix-run/node'
-import Navbar from '../components/layout/navBar'
 import Hero from '../components/specific/hero'
 import Collab from '../components/specific/collab'
 import Skills from '../components/specific/skills'
@@ -28,8 +27,7 @@ export const links: LinksFunction = () => {
 export default function Index() {
   return (
     <div>
-      <Navbar />
-      <div className='flex flex-col gap-28'>
+      <div className='flex flex-col overflow-hidden md:gap-28'>
         <Hero />
         <Collab />
         <Skills />
@@ -40,12 +38,12 @@ export default function Index() {
       </div>
       <img
         src='/svg/eclipse.svg'
-        className='absolute right-0 top-0 -z-10 size-[368px]'
+        className='invisible absolute right-0 top-0 -z-10 size-[368px] md:visible'
         alt=''
       />
 
       <img
-        className='absolute -top-[2px] -z-40 h-[978px]'
+        className='absolute top-[-43px] -z-40 h-[600px] object-cover md:-top-[2px] md:h-[978px] md:w-full'
         src='/images/homePage/rectangle.png'
         alt=''
       />
