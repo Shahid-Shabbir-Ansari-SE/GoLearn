@@ -15,6 +15,12 @@ router.post(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const user = new User(req.body)
+      // if (!user) {
+      //   return res.status(400).send({ message: 'User not found' })
+      // }
+      // if(!user.email || !user.password || !user.name || !user.phoneNumber) {
+      //   return res.status(400).send({ message: 'All fields are required' })
+      // }
       const existingUser = await User.findOne({ email: user.email })
       if (existingUser) {
         return res.status(400).send({ message: 'Email already exists' })
@@ -22,12 +28,11 @@ router.post(
       user.salt = await salt
       await user.save()
       // check cookies and find token if not exist then gen token
-      if (!req.cookies.null){
+      if (!req.cookies.null) {
         res.clearCookie('token')
         generatedToken(req, res, next, user)
         res.status(201).send(user)
-      }
-      else {
+      } else {
         generatedToken(req, res, next, user)
         res.status(201).send(user)
       }
@@ -58,6 +63,20 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
       }
     }
   )(req, res, next)
+})
+
+router.put('/role', async (req: Request, res: Response) => {
+  try {
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) {
+      return res.status(400).send({ message: 'User not found' })
+    }
+    user.role = req.body.role
+    await user.save()
+    res.send(user)
+  } catch (error) {
+    res.status
+  }
 })
 
 export default router

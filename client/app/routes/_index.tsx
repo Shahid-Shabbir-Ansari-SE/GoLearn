@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node'
+import type { MetaFunction, LinksFunction } from '@remix-run/node'
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,12 +7,16 @@ export const meta: MetaFunction = () => {
   ]
 }
 
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: 'icon',
+      href: '/favicon.svg',
+      type: 'image/png'
+    }
+  ]
+}
+
 export default function Index() {
-  return (
-    <div>
-      <h1 className='ml-4 flex h-24 border-2 border-gray-300 p-3 text-gray-700 shadow-md'>
-        Welcome to Remix
-      </h1>
-    </div>
-  )
+  return <div>{process.env.NODE_ENV}</div>
 }
