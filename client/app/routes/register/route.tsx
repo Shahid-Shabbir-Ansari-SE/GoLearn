@@ -2,12 +2,16 @@
 import { register } from '~/utils/auth/register'
 import { userRegister } from '~/types/auth'
 import React from 'react'
+import { useNavigate } from '@remix-run/react'
+import Loader from '~/components/reusable/loader'
 
 export default function Route() {
   const [name, setName] = React.useState(String)
   const [email, setEmail] = React.useState(String)
   const [phoneNumber, setPhoneNumber] = React.useState(String)
   const [password, setPassword] = React.useState(String)
+  const redirect = useNavigate()
+  const [loading, setLoading] = React.useState(false)
 
   const userInfo: userRegister = {
     name: name,
@@ -33,13 +37,17 @@ export default function Route() {
   }
 
   const handleRegister = async () => {
+    setLoading(true)
     try {
       const res = await register(userInfo)
-      console.log(res)
+      setLoading(false)
+      if (res && res.message === 'User registered successfully') {
+        redirect('/role')
+      }
     } catch (err) {
+      setLoading(false)
       console.log(err)
     }
-    console.log(userInfo)
   }
 
   return (
@@ -52,6 +60,9 @@ export default function Route() {
         />
       </div>
       <div className='md:w-1/2 lg:w-1/2 xl:w-[45%] w-full lg:min-h-full xl:h-screen h-screen grid items-center'>
+        {loading && (
+          <Loader />)
+        }
         <div className='grid items-center gap-[17px] px-5 py-[27px]'>
           <h1 className='px-[22px] py-[26px] text-center font-arialBold text-[32px] text-primary'>
             GoLearn
