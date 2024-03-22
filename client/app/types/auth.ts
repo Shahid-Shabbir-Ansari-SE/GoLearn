@@ -11,5 +11,11 @@ export interface userLogin {
 }
 
 export interface userRole {
+  email: string
   role: string
+}
+
+export interface fieldinterested {
+  email: string
+  field: string[]
 }
