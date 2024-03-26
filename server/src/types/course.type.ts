@@ -13,6 +13,12 @@ interface CourseContent {
   courseVideo: string[]
 }
 
+interface CourseComment {
+  comment: string
+  commentOwnerID: string
+  commentRating: number
+}
+
 export interface CourseModel extends mongoose.Document {
   mainImageURL: string
   title: string
@@ -20,6 +26,9 @@ export interface CourseModel extends mongoose.Document {
   courseTime: CourseTime
   courseContent: CourseContent
   coursePrice: string
-  startDate: Date
+  courseLevel: string
+  courseLanguage: string
   enrolledPeople: number
+  courseCategory: string
+  courseComments: CourseComment[]
 }

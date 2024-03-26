@@ -54,13 +54,39 @@ const courseSchema = new mongoose.Schema<CourseModel>({
     type: String,
     required: true
   },
-  startDate: {
-    type: Date,
+  courseLevel: {
+    type: String,
+    required: true
+  },
+  courseLanguage: {
+    type: String,
     required: true
   },
   enrolledPeople: {
     type: Number,
     required: true
+  },
+  courseCategory: {
+    type: String,
+    required: true
+  },
+  courseComments: {
+    type: [
+      {
+        comment: {
+          type: String,
+          required: true
+        },
+        commentOwnerId: {
+          type: String,
+          required: true
+        },
+        commmentRating: {
+          type: Number,
+          required: true
+        }
+      }
+    ]
   }
 })
 
