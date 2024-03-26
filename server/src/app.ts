@@ -8,19 +8,13 @@ import './configs/passport.config'
 import cookieParser from 'cookie-parser'
 import course from './routes/course.route'
 import instructor from './routes/instructor.route'
-import cors from 'cors'
 
 dotenv.config()
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true
-}
 
 const app = express()
 app.use(cookieParser())
 app.use(express.json())
 const port = process.env.PORT
-app.use(cors(corsOptions))
 app.use(passport.initialize())
 
 connectDB()

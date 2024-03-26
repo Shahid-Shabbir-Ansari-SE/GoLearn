@@ -1,8 +1,8 @@
 {
-  "name": "@shahid-shabbir-ansari-se/golearn",
+  "name": "SkillFlare",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Shahid-Shabbir-Ansari-SE/GoLearn.git",
+  "repository": "https://github.com/Shahid-Shabbir-Ansari-SE/SkillFlare.git",
   "license": "MIT",
   "scripts": {
     "install": "cd client && yarn install && cd ../server && yarn install",

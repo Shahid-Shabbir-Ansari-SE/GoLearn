@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#623CE7',
+        primary: '#623CE7'
       },
       fontFamily: {
         arialBold: ['Arial Rounded MT Bold', 'monospace'],
@@ -15,7 +15,7 @@ export default {
         interRegular: ['Inter Regular', 'monospace'],
         interSemiBold: ['Inter SemiBold', 'monospace'],
         interBold: ['Inter Bold', 'monospace']
-      },
+      }
     }
   },
   plugins: []
