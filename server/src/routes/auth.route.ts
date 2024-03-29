@@ -22,12 +22,11 @@ router.post(
       user.salt = await salt
       await user.save()
       // check cookies and find token if not exist then gen token
-      if (!req.cookies.null){
+      if (!req.cookies.null) {
         res.clearCookie('token')
         generatedToken(req, res, next, user)
         res.status(201).send(user)
-      }
-      else {
+      } else {
         generatedToken(req, res, next, user)
         res.status(201).send(user)
       }

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev --manual",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "eslint ./app/",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
@@ -16,7 +16,9 @@
     "@remix-run/node": "^2.8.0",
     "@remix-run/react": "^2.8.0",
     "@remix-run/serve": "^2.8.0",
+    "axios": "^1.6.8",
     "isbot": "^4.1.0",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
