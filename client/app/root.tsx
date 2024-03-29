@@ -27,7 +27,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        <div className='md:mb-[115px]'>
+        <div className='mb-[63px] md:m-0'>
           <NavBar />
         </div>
         <Outlet />

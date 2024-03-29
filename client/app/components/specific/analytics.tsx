@@ -1,7 +1,7 @@
 export default function Analytics() {
   return (
-    <div className='mt-16 items-center md:w-full md:justify-center md:flex md:flex-col md:items-center justify-between space-y-7 px-7 text-center xl:flex xl:space-y-0 xl:px-36 xl:text-left'>
-      <div className='xl:w-[50%] px-7 md:w-[62%]'>
+    <div className='mt-16 items-center justify-between space-y-7 px-7 text-center md:flex md:w-full md:flex-col md:items-center md:justify-center xl:flex xl:space-y-0 xl:px-36 xl:text-left'>
+      <div className='px-7 md:w-[62%] xl:w-[50%]'>
         <img src='/images/homePage/analytics.png' alt='' />
       </div>
       <div className='flex flex-col gap-5 xl:w-[50%]'>

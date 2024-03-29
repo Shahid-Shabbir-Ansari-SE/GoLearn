@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "install": "cd client && yarn install && cd ../server && yarn install",
-    "dev": "concurrently \"cd client && yarn run dev\" \"cd server && yarn dev\""
+    "dev": "concurrently \"cd client && yarn run dev\" \"cd server && yarn dev\"",
+    "lint": "cd client && yarn lint && cd ../server && yarn lint",
+    "format": "cd client && yarn format && cd ../server && yarn format"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
