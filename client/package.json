@@ -6,9 +6,10 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev --manual",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "eslint ./app/",
     "start": "remix-serve ./build/index.js",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
     "@remix-run/css-bundle": "^2.8.0",
@@ -23,7 +24,6 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.8.0",
-    "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",

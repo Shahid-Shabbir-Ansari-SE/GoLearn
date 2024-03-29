@@ -17,14 +17,19 @@ router.post('/create_course', async (req: Request, res: Response) => {
 })
 
 // Get Courses By Instructor
-router.get('/courses_by_instructor/:instructorID', async (req: Request, res: Response) => {
-  try {
-    const courses = await Course.find({ 'courseContent.courseInstructorID': req.params.instructorID })
-    res.status(200).send(courses)
-  } catch (error) {
-    res.status(500).send(error)
+router.get(
+  '/courses_by_instructor/:instructorID',
+  async (req: Request, res: Response) => {
+    try {
+      const courses = await Course.find({
+        'courseContent.courseInstructorID': req.params.instructorID
+      })
+      res.status(200).send(courses)
+    } catch (error) {
+      res.status(500).send(error)
+    }
   }
-})
+)
 
 // Get All Courses
 router.get('/all_courses', async (req: Request, res: Response) => {
@@ -47,6 +52,17 @@ router.get('/:id', async (req: Request, res: Response) => {
     res.status(200).send(course)
   } catch (error) {
     res.status(500).send(error)
+  }
+})
+
+router.get('/search/:query', async (req: Request, res: Response) => {
+  try {
+    const courses = await Course.find({
+      title: { $regex: req.params.query, $options: 'i' }
+    })
+    res.status(200).send(courses)
+  } catch (error) {
+    res.status(500).send
   }
 })
 

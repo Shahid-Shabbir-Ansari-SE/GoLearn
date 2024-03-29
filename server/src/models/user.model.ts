@@ -2,7 +2,11 @@ import mongoose from 'mongoose'
 import { hash } from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
-  name: {
+  first_name: {
+    type: String,
+    required: true
+  },
+  last_name: {
     type: String,
     required: true
   },
@@ -11,10 +15,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  phoneNumber: {
-    type: String,
-    required: true
-  },
   password: {
     type: String,
     required: true
@@ -22,12 +22,6 @@ const userSchema = new mongoose.Schema({
   salt: {
     type: String,
     required: true
-  },
-  role: {
-    type: String
-  },
-  fieldInterested: {
-    type: [String]
   }
 })
 

@@ -51,30 +51,26 @@ export default function Route() {
   }
 
   return (
-    <div className='flex flex-row col-span-2'>
-      <div className='hidden w-1/2 xl:w-[55%] lg:flex md:flex'>
+    <div className='col-span-2 flex flex-row'>
+      <div className='hidden w-1/2 md:flex lg:flex xl:w-[55%]'>
         <img
-          className='lg:h-full xl:min-h-[678px] xl:max-h-screen md:h-screen object-cover w-full'
+          className='w-full object-cover md:h-screen lg:h-full xl:max-h-screen xl:min-h-[678px]'
           src='/images/register/smileWoman.png'
           alt=''
         />
       </div>
-      <div className='md:w-1/2 lg:w-1/2 xl:w-[45%] w-full lg:min-h-full xl:h-screen h-screen grid items-center'>
-        {loading && (
-          <Loader />)
-        }
+      <div className='grid h-screen w-full items-center md:w-1/2 lg:min-h-full lg:w-1/2 xl:h-screen xl:w-[45%]'>
+        {loading && <Loader />}
         <div className='grid items-center gap-[17px] px-5 py-[27px]'>
           <h1 className='px-[22px] py-[26px] text-center font-arialBold text-[32px] text-primary'>
             GoLearn
           </h1>
           <div className='grid gap-5 lg:flex'>
-            <button
-              className='flex h-[52px] w-full items-center justify-center gap-[10px] rounded-[7px] border font-interSemiBold'>
+            <button className='flex h-[52px] w-full items-center justify-center gap-[10px] rounded-[7px] border font-interSemiBold'>
               <img src='/svg/facebook.svg' alt='' />
               <p>Continue with Facebook</p>
             </button>
-            <button
-              className='flex h-[52px] w-full items-center justify-center gap-[10px] rounded-[7px] border font-interSemiBold'>
+            <button className='flex h-[52px] w-full items-center justify-center gap-[10px] rounded-[7px] border font-interSemiBold'>
               <img src='/svg/google.svg' alt='' />
               <p>Continue with Google</p>
             </button>
@@ -109,8 +105,7 @@ export default function Route() {
             onChange={handleInputs}
             value={phoneNumber}
           />
-          <div
-            className='flex h-[55px] w-full rounded-[7px] border px-3 focus-within:border-2 focus-within:border-primary'>
+          <div className='flex h-[55px] w-full rounded-[7px] border px-3 focus-within:border-2 focus-within:border-primary'>
             <input
               className='w-full outline-none'
               type='password'

@@ -1,7 +1,7 @@
 /* ----------------- Import Packages ----------------- */
 import Jwt from 'jsonwebtoken'
-import { Request, Response, NextFunction } from 'express'
 import { userType } from '../types/user.type'
+import { Request, Response, NextFunction } from 'express'
 
 /* ------------------ Generate Token Function */
 const generatedToken = (

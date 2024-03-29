@@ -1,9 +1,6 @@
 node_modules/
-.idea/*
-!.idea/rcb-settings.xml
+.idea
 .vscode
 .env/
 build
 .cache
-dist/
-dev/
