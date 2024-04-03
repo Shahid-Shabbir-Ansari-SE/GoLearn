@@ -8,7 +8,8 @@ import {
   Scripts,
   ScrollRestoration
 } from '@remix-run/react'
-import NavBar from '~/components/layout/navBar'
+import WhichBar from './showBar'
+import Sidebar from './components/layout/sideBar'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet }
@@ -28,9 +29,9 @@ export default function App() {
         <Scripts />
         <LiveReload />
         <div className='mb-[63px] md:m-0'>
-          <NavBar />
+          <WhichBar />
         </div>
-        <Outlet />
+          <Outlet />
       </body>
     </html>
   )
