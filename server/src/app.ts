@@ -1,13 +1,9 @@
-import express from 'express'
+import 'module-alias/register'
+import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
-import { connectDB } from './configs/db.config'
-import { Request, Response } from 'express'
-import auth from './routes/auth.route'
+import '@configs/passport.config'
+import { connectDB } from '@configs/db.config'
 import passport from 'passport'
-import './configs/passport.config'
-import cookieParser from 'cookie-parser'
-import course from './routes/course.route'
-import instructor from './routes/instructor.route'
 import cors from 'cors'
 
 dotenv.config()
@@ -17,10 +13,12 @@ const corsOptions = {
 }
 
 const app = express()
-app.use(cookieParser())
+app.use(cors(corsOptions))
+import auth from '@routes/auth.route'
+import course from '@routes/course.route'
+import instructor from '@routes/instructor.route'
 app.use(express.json())
 const port = process.env.PORT
-app.use(cors(corsOptions))
 app.use(passport.initialize())
 
 connectDB()

@@ -1,5 +1,5 @@
 import type { LinksFunction } from '@remix-run/node'
-import stylesheet from './tailwind.css'
+import stylesheet from '~/tailwind.css'
 import {
   Links,
   LiveReload,
@@ -8,9 +8,11 @@ import {
   Scripts,
   ScrollRestoration
 } from '@remix-run/react'
-import NavBar from '~/components/layout/navBar'
+import WhichBar from '~/showBar'
+import { NextUIProvider } from '@nextui-org/react'
 
 export const links: LinksFunction = () => [
+  { rel: 'icon', type: 'image/ico', href: '/favicon.svg' },
   { rel: 'stylesheet', href: stylesheet }
 ]
 
@@ -24,13 +26,15 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-        <div className='mb-[63px] md:m-0'>
-          <NavBar />
-        </div>
-        <Outlet />
+        <NextUIProvider>
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+          <div className='md:m-0'>
+            <WhichBar />
+          </div>
+          <Outlet />
+        </NextUIProvider>
       </body>
     </html>
   )

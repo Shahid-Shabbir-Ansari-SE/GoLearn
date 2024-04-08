@@ -1,21 +1,28 @@
+import { access, profile, scalability } from '~/image'
+
 export default function Promise() {
   return (
-    <div className="bg-fill mt-16 flex flex-col items-center justify-center bg-[url('/images/homePage/promiseBg.png')] bg-[length:170vw_100%] bg-center pt-16 text-center text-white md:bg-cover">
+    <div
+      className={`bg-fill mt-16 flex flex-col items-center justify-center bg-[url('https://i.imgur.com/ne7o8ZF.png')] bg-[length:170vw_100%] bg-center pt-16 text-center text-white md:bg-cover`}
+    >
       <h1>Why learn with Golearn</h1>
       <img
         src='/svg/promise.svg'
         className='my-4 px-5 xl:w-[350px] xl:p-0'
         alt=''
       />
+
+      {/*
+        Features List:
+          1. Real-time Accessibility
+          2. Scalability
+          3. Profile
+      */}
       <div className='my-16 items-center gap-10 xl:flex xl:px-24'>
         <div className='w-full text-center xl:w-1/2 xl:text-left'>
           <ul>
             <li className='justify-center gap-5 px-5 xl:flex xl:h-[128px] xl:p-0'>
-              <img
-                className='mx-auto mb-5 size-[88px]'
-                src='/images/homePage/access.png'
-                alt=''
-              />
+              <img className='mx-auto mb-5 size-[88px]' src={access} alt='' />
               <div>
                 <h1 className='font-interBold text-2xl'>
                   Real-time Accessibility
@@ -30,7 +37,7 @@ export default function Promise() {
             <li className='justify-center gap-5 p-5 xl:flex xl:h-[128px] xl:p-0'>
               <img
                 className='mx-auto mb-5 size-[88px]'
-                src='/images/homePage/scalability.png'
+                src={scalability}
                 alt=''
               />
               <div>
@@ -45,11 +52,7 @@ export default function Promise() {
               </div>
             </li>
             <li className='justify-center gap-5 p-5 xl:flex xl:h-[128px] xl:p-0'>
-              <img
-                className='mx-auto mb-5 size-[88px]'
-                src='/images/homePage/profile.png'
-                alt=''
-              />
+              <img className='mx-auto mb-5 size-[88px]' src={profile} alt='' />
               <div>
                 <h1 className='font-interBold text-2xl'>
                   Real-time Accessibility

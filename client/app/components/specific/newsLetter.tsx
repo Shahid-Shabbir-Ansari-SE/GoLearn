@@ -1,3 +1,5 @@
+import { women } from '~/image'
+
 export default function NewsLetter() {
   return (
     <div className='relative m-4 xl:h-auto'>
@@ -6,7 +8,7 @@ export default function NewsLetter() {
         <div className='relative flex size-60 items-center justify-center bg-[url("/svg/frame.svg")] bg-[length:15rem_15rem] md:size-[22rem] md:bg-[length:22rem_22rem] xl:absolute xl:-left-4 xl:z-10 xl:size-96 xl:bg-[length:24rem_24rem]'>
           <img
             className='absolute size-40 md:size-60 xl:size-64'
-            src='/images/homePage/women.png'
+            src={women}
             alt=''
           />
         </div>

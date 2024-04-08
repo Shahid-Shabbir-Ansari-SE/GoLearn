@@ -1,7 +1,7 @@
 export default function Route() {
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className='absolute left-[75px] top-[59px] w-full'>
+      <h1 className='pt-[1024px]'>Shahid</h1>
     </div>
   )
 }

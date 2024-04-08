@@ -12,12 +12,10 @@ export const verifyToken = async () => {
         Authorization: token
       }
     })
-
     if (res.data.message === 'Access granted!') {
-      return res.data.user
-    } else {
-      return { message: 'Login Again' }
+      return res.data
     }
+    return { message: 'Login Again' }
   } catch (error) {
     console.error(error)
   }

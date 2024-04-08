@@ -1,10 +1,12 @@
+import { designStrategy, homeSimleWomen } from '~/image'
+
 export default function Skills() {
   return (
     <div className='grid w-full justify-center xl:flex xl:gap-32 xl:px-48'>
       <div className='flex w-full justify-center xl:w-[524px]'>
         <img
           className='w-[524px] px-10 py-5 md:mb-5 md:p-0 md:pb-10'
-          src='/images/homePage/smileWoman.png'
+          src={homeSimleWomen}
           alt=''
         />
       </div>
@@ -19,7 +21,7 @@ export default function Skills() {
         </p>
         <img
           className='px-20 pb-5 md:py-5 xl:-ml-5 xl:p-0'
-          src='/images/homePage/designStrategy.png'
+          src={designStrategy}
           alt=''
         />
       </div>
