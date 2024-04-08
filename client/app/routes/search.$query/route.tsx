@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useLocation } from '@remix-run/react'
-import { searchCourse } from '~/utils/courses/searchCourse'
+import { searchCourse } from '~/utils/course/searchCourse'
 
 interface Course {
   courseContent: {

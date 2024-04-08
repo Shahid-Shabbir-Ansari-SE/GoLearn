@@ -1,8 +1,10 @@
+import { instructorPanel } from '~/image'
+
 export default function hero() {
   return (
     <div>
-      <div className='relative flex h-full w-full flex-col items-center justify-center xl:flex-row'>
-        <div className='mt-32 flex h-[259px] w-[312px] flex-col gap-[16px] text-white md:mt-0 md:w-3/4 md:gap-[18px] xl:-mt-[50px] xl:ml-[64px] xl:w-[calc(100%-959px)]'>
+      <div className='relative flex h-full w-full flex-col items-center justify-center xl:mt-12 xl:flex-row'>
+        <div className='mt-[32px] flex h-[259px] w-[312px] flex-col gap-[16px] text-white md:mt-32 md:w-3/4 md:gap-[18px] xl:ml-[64px] xl:mt-0 xl:w-[calc(100%-959px)]'>
           <h1 className='w-full font-interBold text-xl md:text-4xl'>
             Launch a new career in as <br className='md:hidden' /> little as 60
             Days..
@@ -31,7 +33,7 @@ export default function hero() {
           </div>
         </div>
         <div className='-ml-5 -mt-[85px] flex items-end md:-mt-[50px] md:ml-0 xl:w-[959px]'>
-          <img src='/images/homePage/instructorPanel.png' alt='size-3 md:' />
+          <img src={instructorPanel} alt='size-3 md:' />
         </div>
       </div>
       <div className='-mt-[20px] flex w-screen justify-center md:mt-10 md:w-full xl:justify-end'>

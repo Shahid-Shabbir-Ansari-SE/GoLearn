@@ -66,6 +66,4 @@ router.get('/search/:query', async (req: Request, res: Response) => {
   }
 })
 
-
-
 export default router
