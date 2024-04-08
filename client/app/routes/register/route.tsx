@@ -107,7 +107,7 @@ export default function Route() {
     const checkToken = async () => {
       const res = await verifyToken()
       if (res.message === 'Access granted!') {
-        // redirect('/dashboard')
+        redirect('/dashboard')
       }
     }
     checkToken()
