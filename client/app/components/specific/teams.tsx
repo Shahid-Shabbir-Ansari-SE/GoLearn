@@ -1,3 +1,5 @@
+import { communicatingWomen } from '~/image'
+
 export default function teams() {
   return (
     <div className='flex flex-col-reverse items-center justify-between xl:-mt-10 xl:flex-row xl:px-48'>
@@ -44,7 +46,7 @@ export default function teams() {
         </ul>
       </div>
       <div className='-mb-5 w-full px-7 md:m-0 md:mx-auto md:w-[65%] xl:-mr-5 xl:w-1/2 xl:p-0'>
-        <img className='' src='/images/homePage/teams.png' alt='' />
+        <img className='' src={communicatingWomen} alt='' />
       </div>
     </div>
   )

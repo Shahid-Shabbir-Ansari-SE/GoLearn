@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { userRole } from '~/types/auth'
 import { verifyToken } from './verifyToken'
 
 export const setRole = async (role: string) => {
