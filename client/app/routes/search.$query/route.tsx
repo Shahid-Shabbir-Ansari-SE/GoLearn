@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link, useLocation } from '@remix-run/react'
 import { searchCourse } from '~/utils/course/searchCourse'
+import { getCategories } from '~/utils/category/getCategories'
+import { Category } from '~/types/category'
+import { searchTermInCategory } from '~/utils/category/searchTermInCategory'
 
 interface Course {
   courseContent: {
@@ -24,13 +27,37 @@ export default function SearchRoute() {
   const searchTerm = pathParts.length > 1 ? pathParts[1] : ''
 
   const [searchResults, setSearchResults] = React.useState<Course[]>([])
+  const [categories, setCategories] = React.useState<Category[]>([])
+
   React.useEffect(() => {
     const handleResults = async () => {
       setSearchResults(await searchCourse(searchTerm))
     }
     handleResults()
-  }, [searchTerm, setSearchResults])
+  }, [searchTerm])
 
+  React.useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await getCategories()
+        setCategories(categoriesData)
+        console.log('Categories:', categories)
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+      }
+    }
+    console.log('Fetching categories...')
+    fetchCategories()
+  }, [])
+
+  const handleCategorySearch = async (categoryId: string) => {
+    try {
+      const searchResults = await searchTermInCategory(searchTerm, categoryId)
+      setSearchResults(searchResults)
+    } catch (error) {
+      console.error('Error searching in category:', error)
+    }
+  }
   return (
     <div className='space-y-[33px]'>
       <div className='flex justify-between px-[60px]'>
@@ -44,18 +71,20 @@ export default function SearchRoute() {
               All Careers
             </h1>
             <hr />
-          </div>
-          <div className='h-40 rounded-[10px] border'>
-            <h1 className='flex h-[50px] items-center px-5 font-interSemiBold'>
-              All Careers
-            </h1>
-            <hr />
-          </div>
-          <div className='h-40 rounded-[10px] border'>
-            <h1 className='flex h-[50px] items-center px-5 font-interSemiBold'>
-              All Careers
-            </h1>
-            <hr />
+            <ul>
+              {categories.map((category) => (
+                <li
+                  key={category._id}
+                  className='flex h-[50px] items-center px-5'
+                >
+                  <button
+                    onClick={() => handleCategorySearch(category._id)}
+                  >
+                    {category.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className='flex w-full flex-wrap gap-[30px] xl:col-span-3'>

@@ -22,4 +22,10 @@ export interface CourseModel extends mongoose.Document {
   coursePrice: string
   startDate: Date
   enrolledPeople: number
+  courseCategoryId: [
+    {
+      type: mongoose.Schema.Types.ObjectId
+      ref: 'Category'
+    }
+  ]
 }
