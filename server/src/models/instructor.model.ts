@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { instructorModel } from '../types/instructor.types'
+import { instructorModel } from '@interfaces/instructor.interface'
 
 const instructorSchema = new mongoose.Schema<instructorModel>({
   instructorImageURL: {

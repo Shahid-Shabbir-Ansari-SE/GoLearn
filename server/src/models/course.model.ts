@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { CourseModel } from '../types/course.type'
+import { CourseModel } from '@interfaces/course.interface'
 
 const courseSchema = new mongoose.Schema<CourseModel>({
   mainImageURL: {
@@ -50,6 +50,13 @@ const courseSchema = new mongoose.Schema<CourseModel>({
     },
     required: true
   },
+  courseCategoryId: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category',
+      required: true
+    }
+  ],
   coursePrice: {
     type: String,
     required: true

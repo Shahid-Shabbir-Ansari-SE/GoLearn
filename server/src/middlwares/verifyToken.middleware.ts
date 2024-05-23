@@ -3,8 +3,8 @@ import { Request, Response } from 'express'
 import passport from 'passport'
 import { Strategy as JwtStrategy, VerifiedCallback } from 'passport-jwt'
 import { JwtPayload } from 'jsonwebtoken'
-import { userType } from '../types/user.type'
-import User from '../models/user.model'
+import { userType } from '@interfaces/user.interface'
+import User from '@models/user.model'
 
 /* ---------------- Extract token from cookie ---------------- */
 const cookieExtractor = (req: Request): string | null => {
