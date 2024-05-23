@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express'
-import Course from '../models/course.model'
-import { CourseModel } from '../types/course.type'
+import Course from '@models/course.model'
+import { CourseModel } from '@interfaces/course.interface'
 
 const router = Router()
 

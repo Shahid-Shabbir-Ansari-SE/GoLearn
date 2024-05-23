@@ -1,6 +1,6 @@
 import express from 'express'
-import Instructor from '../models/instructor.model'
-import { instructorModel } from '../types/instructor.types'
+import Instructor from '@models/instructor.model'
+import { instructorModel } from '@interfaces/instructor.interface'
 
 const router = express.Router()
 

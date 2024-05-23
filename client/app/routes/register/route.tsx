@@ -239,7 +239,7 @@ export default function Route() {
             className='my-1 h-10 w-full rounded-[10px] bg-primary font-interSemiBold text-white'
             onClick={handleRegister}
           >
-            Login
+            Register
           </button>
         </form>
 

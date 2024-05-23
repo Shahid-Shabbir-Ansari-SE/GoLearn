@@ -88,8 +88,8 @@
       "@middlewares/*": [
         "src/middlewares/*"
       ],
-      "@types/*": [
-        "src/types/*"
+      "@interfaces/*": [
+        "src/interfaces/*"
       ]
     },
     /* Type Checking */
