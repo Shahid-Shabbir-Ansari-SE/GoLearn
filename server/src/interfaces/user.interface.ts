@@ -1,3 +1,6 @@
+import { WishlistModel } from './wishlist.interface'
+import { CartModel } from './cart.interface'
+
 export interface userType {
   toObject(): userType
   toObject(): userType
@@ -8,6 +11,8 @@ export interface userType {
   salt: string
   role?: string | null
   fieldInterested?: string[] | null
+  wishlist?: WishlistModel[] | null
+  cart?: CartModel | null
   createdAt: Date
   updatedAt: Date
 }

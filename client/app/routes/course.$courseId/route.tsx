@@ -1,6 +1,8 @@
 import React from 'react'
 import { getCourseById } from '~/utils/course/getById'
 import { useLocation } from '@remix-run/react'
+import { addToWishlist } from '~/utils/wishlist/addToWishlist'
+import { verifyToken } from '~/utils/auth/verifyToken'
 
 interface Course {
   title: string
@@ -37,7 +39,20 @@ export default function Course() {
       }
     }
     getCourse()
-  })
+  }, [])
+
+  const handleWishlist = async () => {
+    try {
+      const token = await verifyToken()
+      console.log(token)
+          const userId = token.user[0]._id
+      console.log(userId)
+      const response = await addToWishlist(userId, courseId)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div>
@@ -137,7 +152,10 @@ export default function Course() {
               <img src='\svg\plus.svg' alt='' />
               Enroll Now
             </button>
-            <button className='flex w-full items-center justify-center rounded-[10px] border border-white py-2 font-interSemiBold text-white'>
+            <button
+              onClick={handleWishlist}
+              className='flex w-full items-center justify-center rounded-[10px] border border-white py-2 font-interSemiBold text-white'
+            >
               <img src='\svg\bookmark.svg' alt='' />
               Whishlist
             </button>
