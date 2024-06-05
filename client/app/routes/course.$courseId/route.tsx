@@ -1,6 +1,8 @@
 import React from 'react'
 import { getCourseById } from '~/utils/course/getById'
 import { useLocation } from '@remix-run/react'
+import enrollCourse from '~/utils/enroll/enrollCourse'
+import { verifyToken } from '~/utils/auth/verifyToken'
 
 interface Course {
   title: string
@@ -18,12 +20,96 @@ interface Course {
   courseLanguage: string
 }
 
+interface CourseEnrollment {
+  courseId: string
+  createdAt: string // You might want to use Date type if possible
+  updatedAt: string // You might want to use Date type if possible
+}
+
+interface User {
+  _id: string
+  name: string
+  email: string
+  phoneNumber: string
+  password: string
+  fieldInterested: string[] // Assuming field interests are strings
+  enrollments: CourseEnrollment[]
+  salt: string
+  __v: number
+}
+
+interface VerifyTokenResponse {
+  message: string
+  user: User[]
+}
+
 export default function Course() {
   const [loading, setLoading] = React.useState(false)
   const [course, setCourse] = React.useState<Course>()
   const location = useLocation()
   const pathParts = location.pathname.split('/course/')
   const courseId = pathParts.length > 1 ? pathParts[1] : ''
+  const [enrollMessage, setEnrollMessage] = React.useState<string>('')
+  const [userId, setUserId] = React.useState<string>('')
+  const [checkEnrolled, setCheckEnrolled] = React.useState<boolean>(false)
+  const [currentVideoIndex, setCurrentVideoIndex] = React.useState(0)
+
+  const handleNextVideo = () => {
+    course &&
+      setCurrentVideoIndex(
+        (prevIndex: number) =>
+          (prevIndex + 1) % course?.courseContent.courseVideo.length
+      )
+  }
+
+  const handlePrevVideo = () => {
+    course &&
+      setCurrentVideoIndex(
+        (prevIndex: number) =>
+          (prevIndex - 1 + course?.courseContent.courseVideo.length) %
+          course?.courseContent.courseVideo.length
+      )
+  }
+  const handleEnrollCourse = async () => {
+    try {
+      getUserId()
+      const response = await enrollCourse(userId, courseId)
+      setEnrollMessage(response.response.data)
+      setTimeout(() => {
+        setEnrollMessage('')
+      }, 1000)
+    } catch (error) {
+      console.error('Failed to enroll course:', error)
+    }
+  }
+
+  // check user is enrolled
+  const checkEnrollment = async () => {
+    try {
+      const response: VerifyTokenResponse = await verifyToken()
+      const enrollments: CourseEnrollment[] = response.user[0].enrollments
+
+      // Check if any enrollment's courses match the provided courseId
+      const isEnrolled: boolean = enrollments.some((enrollment) => {
+        return enrollment.courses.some((course) => course.courseId === courseId)
+      })
+
+      // Update state based on enrollment status
+      setCheckEnrolled(isEnrolled)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getUserId = async () => {
+    try {
+      const response = await verifyToken()
+      setUserId(response.user[0]._id)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   React.useEffect(() => {
     const getCourse = async () => {
       try {
@@ -37,7 +123,7 @@ export default function Course() {
       }
     }
     getCourse()
-  })
+  }, [courseId])
 
   return (
     <div>
@@ -112,20 +198,62 @@ export default function Course() {
         <div className='grid w-1/2 gap-2'>
           <div className='relative'>
             {!loading ? (
-              <div>
-                <img
-                  src={course?.mainImageURL}
-                  alt=''
-                  className='h-[340px] w-full rounded-[10px] object-cover shadow-2xl'
-                />
-                <button>
+              checkEnrolled ? (
+                <div>
+                  {!course ? (
+                    <p>No videos available</p>
+                  ) : (
+                    course?.courseContent.courseVideo.length > 0 && (
+                      <div>
+                        <iframe
+                          width='100%'
+                          height='340px'
+                          src={
+                            course?.courseContent.courseVideo[currentVideoIndex]
+                          }
+                          title={`YouTube video ${currentVideoIndex + 1}`}
+                          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                        ></iframe>
+                        <div className='my-2 flex w-full justify-between px-5'>
+                          <button
+                            className='border border-primary bg-white px-5 py-1 text-primary'
+                            onClick={handlePrevVideo}
+                            disabled={currentVideoIndex === 0}
+                          >
+                            Prev
+                          </button>
+                          <button
+                            className='border border-primary bg-white px-5 py-1 text-primary'
+                            onClick={handleNextVideo}
+                            disabled={
+                              currentVideoIndex ===
+                              (course?.courseContent.courseVideo.length || 1) -
+                                1
+                            }
+                          >
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div>
                   <img
-                    src='\svg\pause.svg'
-                    className='absolute left-[calc(50%-42.5px)] top-[calc(50%-29.5px)]'
+                    src={course?.mainImageURL}
                     alt=''
+                    className='h-[340px] w-full rounded-[10px] object-cover shadow-2xl'
                   />
-                </button>
-              </div>
+                  <button onClick={checkEnrollment}>
+                    <img
+                      src='https://i.ibb.co/BzB9dHx/noun-play-1703078.png'
+                      className='absolute left-1/2 top-1/2 w-24 -translate-x-1/2 -translate-y-1/2 object-cover'
+                      alt=''
+                    />
+                  </button>
+                </div>
+              )
             ) : (
               <div className='flex h-[340px] items-center justify-center rounded-lg border bg-[#dfd3d926]'>
                 <div className='absolute size-8 animate-spin rounded-full border-[3px] border-gray-300 border-t-blue-600' />
@@ -133,7 +261,10 @@ export default function Course() {
             )}
           </div>
           <div className='flex gap-3'>
-            <button className='flex w-full items-center justify-center rounded-[10px] bg-white py-2 font-interSemiBold text-primary'>
+            <button
+              onClick={handleEnrollCourse}
+              className='flex w-full items-center justify-center rounded-[10px] bg-white py-2 font-interSemiBold text-primary'
+            >
               <img src='\svg\plus.svg' alt='' />
               Enroll Now
             </button>
@@ -142,6 +273,7 @@ export default function Course() {
               Whishlist
             </button>
           </div>
+          <p>{enrollMessage && enrollMessage}</p>
         </div>
       </div>
       <div className='flex w-full items-center justify-center'>

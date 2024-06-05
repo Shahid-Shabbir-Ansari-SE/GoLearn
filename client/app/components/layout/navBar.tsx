@@ -10,6 +10,9 @@ import {
 } from '@nextui-org/react'
 import { Link, useLocation, useNavigate } from '@remix-run/react'
 import SearchBar from './searchBar'
+import { useAtom } from 'jotai'
+import { loggedIn } from '~/state/store'
+import { verifyToken } from '~/utils/auth/verifyToken'
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
@@ -23,16 +26,25 @@ export default function NavBar() {
       setOnHomePage(false)
     }
   }, [location.pathname])
+  const [loggedInValue, setLoggedIn] = useAtom(loggedIn)
+
   React.useEffect(() => {
     const isLoginPage = location.pathname === '/login'
     const isRegisterPage = location.pathname === '/register'
-
     if (isLoginPage || isRegisterPage) {
       setOnLoginPage(true)
     } else {
       setOnLoginPage(false)
     }
-  }, [location.pathname])
+    verifyToken().then((res) => {
+      if (res.message === 'Access granted!') {
+        setLoggedIn(true)
+        console.log(res)
+      } else {
+        setLoggedIn(false)
+      }
+    })
+  }, [location.pathname, setLoggedIn])
 
   const menuItems = [
     { name: 'Home', path: '/', darkchevron: 'darkChevron', chevron: 'chevron' },
@@ -125,20 +137,31 @@ export default function NavBar() {
               <img src='/images/homePage/search.png' alt='' />
             </button>
           </NavbarItem>
-          <NavbarItem>
-            <Link
-              to='/login'
-              className={`rounded-lg border-2 border-transparent bg-white px-5 py-1.5 text-primary transition-all duration-200 hover:border-white hover:bg-primary hover:text-white ${onLoginPage ? 'hidden md:block' : 'block'}`}
-            >
-              Login
-            </Link>
-          </NavbarItem>
-          <Link
-            to='/register'
-            className={`${onHomePage ? '' : 'bg-transparent'} rounded-lg border-2 border-white px-4 py-1.5 text-white transition-all duration-200 hover:bg-white hover:text-primary ${onLoginPage ? 'block' : 'hidden md:flex'}`}
-          >
-            Sign Up
-          </Link>
+          {!loggedInValue ? (
+            <NavbarItem className='flex gap-4'>
+              <Link
+                to='/login'
+                className={`rounded-lg border-2 border-transparent bg-white px-5 py-1.5 text-primary transition-all duration-200 hover:border-white hover:bg-primary hover:text-white ${onLoginPage ? 'hidden md:block' : 'block'}`}
+              >
+                Login
+              </Link>
+              <Link
+                to='/register'
+                className={`${onHomePage ? '' : 'bg-transparent'} rounded-lg border-2 border-white px-4 py-1.5 text-white transition-all duration-200 hover:bg-white hover:text-primary ${onLoginPage ? 'block' : 'hidden md:flex'}`}
+              >
+                Sign Up
+              </Link>
+            </NavbarItem>
+          ) : (
+            <NavbarItem>
+              <Link
+                to='/dashboard'
+                className='rounded-lg border-2 border-transparent bg-white px-5 py-1.5 text-primary transition-all duration-200 hover:border-white hover:bg-primary hover:text-white'
+              >
+                Dashboard
+              </Link>
+            </NavbarItem>
+          )}
         </NavbarContent>
         <NavbarMenu className='py-5 text-center font-interLight'>
           <NavbarMenuItem>

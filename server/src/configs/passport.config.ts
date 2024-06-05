@@ -1,7 +1,7 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
-import User from '@models/user.model'
-import { hash } from 'bcrypt'
+import User from '../models/user.model'
+import { compare } from 'bcrypt'
 
 passport.use(
   new LocalStrategy(
@@ -16,15 +16,16 @@ passport.use(
           email
         })
         if (!user) {
-          return done(null, false, { message: 'Email not found' })
+          return done(null, false, { message: 'Invalid email' })
         }
-        const hashedPassword = await hash(
+        const passwordMatch = await compare(
           password + process.env.PEPPER,
-          user.salt
+          user.password
         )
-        if (hashedPassword !== user.password) {
-          return done(null, false, { message: 'Incorrect password' })
+        if (!passwordMatch) {
+          return done(null, false, { message: 'Invalid password' })
         }
+
         return done(null, user)
       } catch (error) {
         return done(error)

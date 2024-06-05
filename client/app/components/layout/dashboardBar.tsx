@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from '@remix-run/react'
 import { verifyToken } from '~/utils/auth/verifyToken'
+import { userEnrolledCourse } from '~/state/store'
+import { useAtom } from 'jotai'
 
 interface User {
   first_name: string
@@ -9,8 +11,9 @@ interface User {
 
 export default function DashboardBar() {
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [user, setUser] = useState<User>()
+  const [error, setError] = useState<unknown>()
+  const [user, setUser] = useState<User | undefined>()
+  const [enrolledCourses, setEnrolledCourses] = useAtom(userEnrolledCourse)
   const navigate = useNavigate()
 
   const handleGoBack = () => {
@@ -23,24 +26,23 @@ export default function DashboardBar() {
         setLoading(true)
         const userData = await verifyToken()
         setUser(userData[0])
-        console.log(userData)
+        setEnrolledCourses(userData.user[0].enrollments)
         setLoading(false)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
+      } catch (error) {
         setError(error)
         setLoading(false)
       }
     }
 
     fetchUserData()
-  }, [])
+  }, [setEnrolledCourses])
 
   if (loading) {
     return <div>Loading...</div>
   }
 
   if (error) {
-    return <div>Error: {error}</div>
+    return <div>Error</div>
   }
 
   return (
@@ -80,10 +82,10 @@ export default function DashboardBar() {
         )}
       </div>
       <div className='flex w-1/2 items-center justify-end gap-5'>
-        <form className='flex rounded-[10px] border p-2 focus-within:border'>
+        <form className='hidden rounded-[10px] border p-2 focus-within:border md:flex'>
           <input
             placeholder='Search'
-            className='w-72 outline-none'
+            className='hidden w-72 outline-none lg:block'
             type='text'
           />
           <svg

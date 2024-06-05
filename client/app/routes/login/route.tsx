@@ -76,6 +76,7 @@ export default function Route() {
       const res = await login(userInfo)
       if (res.message) {
         setErrorMessages(res.message)
+        console.log(res)
       } else {
         setErrorMessages('Login Successful! Redirecting...')
         setIsLoading(true)

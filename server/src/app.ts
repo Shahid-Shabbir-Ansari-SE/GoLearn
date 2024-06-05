@@ -18,6 +18,7 @@ import auth from '@routes/auth.route'
 import course from '@routes/course.route'
 import instructor from '@routes/instructor.route'
 import category from '@routes/category.route'
+import enrollment from '@routes/enrollment.route'
 app.use(express.json())
 const port = process.env.PORT
 app.use(passport.initialize())
@@ -28,6 +29,7 @@ app.use('/api/auth', auth)
 app.use('/api/course', course)
 app.use('/api/instructor', instructor)
 app.use('/api/category', category)
+app.use('/api/enrollment', enrollment)
 
 app.get('/', (_req: Request, res: Response) => {
   res.send('App is running!')
