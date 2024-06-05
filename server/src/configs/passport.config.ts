@@ -12,12 +12,11 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        const user = await User.findOne({
-          email
-        })
+        const user = await User.findOne({ email })
         if (!user) {
           return done(null, false, { message: 'Invalid email' })
         }
+
         const passwordMatch = await compare(
           password + process.env.PEPPER,
           user.password

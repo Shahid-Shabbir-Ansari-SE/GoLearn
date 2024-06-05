@@ -1,9 +1,6 @@
 import mongoose from 'mongoose'
 import { hash } from 'bcrypt'
-import {
-  UserEnrollment,
-  Course
-} from '@interfaces/enrollment.interface'
+import { UserEnrollment, Course } from '@interfaces/enrollment.interface'
 
 const courseSchema = new mongoose.Schema<Course>(
   {
@@ -72,11 +69,10 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.pre('save', async function (next) {
-  const hashedPassword = await hash(
-    this.password + process.env.PEPPER,
-    parseInt(this.salt, 10)
-  )
-  this.password = hashedPassword
+  if (this.isModified('password') || this.isNew) {
+    const saltRounds = 10
+    this.password = await hash(this.password + process.env.PEPPER, saltRounds)
+  }
   next()
 })
 
